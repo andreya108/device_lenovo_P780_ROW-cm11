@@ -26,3 +26,14 @@ PRODUCT_MODEL := P780
 PRODUCT_RELEASE_NAME := p780
 PRODUCT_BRAND := Lenovo
 PRODUCT_MANUFACTURER := Lenovo
+
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
+	ro.hardware=mt6589 \
+	ro.allow.mock.location=0 \
+	ro.debuggable=1 \
+	persist.service.adb.enable=1 \
+
+ADDITIONAL_DEFAULT_PROPERTIES := \
+	ro.secure=0 \
+	ro.adb.secure=0
