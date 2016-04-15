@@ -123,6 +123,9 @@ on post-fs-data
     # watch dog kicker
     write /proc/wdk "0 20 30"
 
+    # andreya108: enable cpufreq scaling
+    write /proc/cpufreq/cpufreq_state 1
+
     # set ptmx group to non-root
     chown root radio /dev/ptmx
 
