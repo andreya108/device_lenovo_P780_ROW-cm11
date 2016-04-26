@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product-if-exists, vendor/lenovo/p780/p780-vendor.mk)
+$(call inherit-product-if-exists, vendor/lenovo/P780_ROW/P780_ROW-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay/
 
@@ -30,13 +30,13 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/root/init.mt6589.rc:root/init.mt6589.rc \
 	$(LOCAL_PATH)/root/init.modem.rc:root/init.modem.rc \
 	$(LOCAL_PATH)/root/init.protect.rc:root/init.protect.rc \
-	$(LOCAL_PATH)/root/init.mt6589.usb.rc:/root/init.mt6589.usb.rc
-
-# frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml
+	$(LOCAL_PATH)/root/init.mt6589.usb.rc:/root/init.mt6589.usb.rc \
+	$(LOCAL_PATH)/root/adb_keys:/root/adb_keys \
 
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
 	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
 	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
 	frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
@@ -60,7 +60,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	persist.radio.fd.off.counter=5 \
 	persist.radio.fd.off.r8.counter=5 \
 	persist.radio.fd.r8.counter=15 \
-        persist.radio.multisim.config=dsds \
+    persist.radio.multisim.config=dsds \
 	persist.sys.usb.config=adb \
 	ril.current.share_modem=2 \
 	ril.external.md=0 \
@@ -84,30 +84,34 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	ro.telephony.ril_class=MediaTekRIL \
 	wifi.direct.interface=p2p0 \
 	wifi.interface=wlan0 \
-	wifi.tethering.interface=ap0
+	wifi.tethering.interface=ap0 \
+	qemu.hw.mainkeys=0
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 PRODUCT_PACKAGES += \
-	gsm0710muxd \
-	libxlog
+	gsm0710muxd
 
 # wifi
 PRODUCT_PACKAGES += \
 	lib_driver_cmd_mtk
 
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+        $(LOCAL_PATH)/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
+        $(LOCAL_PATH)/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+
 # audio
 PRODUCT_PACKAGES += \
 	audio.r_submix.default \
 	audio.a2dp.default \
+    audio.usb.default \
 	libblisrc \
-        libdashplayer
+    libdashplayer \
+    libxlog
 
 PRODUCT_PACKAGES += \
 	Torch
-
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Inherit from those products. Most specific first.
-$(call inherit-product, device/lenovo/p780/device_p780.mk)
+$(call inherit-product, device/lenovo/P780_ROW/device_P780_ROW.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Configure as xhdpi device to prevent breaking without mdpi drawables
@@ -21,7 +21,7 @@ PRODUCT_AAPT_CONFIG := normal mdpi hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := full_p780
-PRODUCT_DEVICE := p780
+PRODUCT_NAME := full_P780_ROW
+PRODUCT_DEVICE := P780_ROW
 PRODUCT_BRAND := lenovo
-PRODUCT_MODEL := p780
+PRODUCT_MODEL := P780_ROW

@@ -33,6 +33,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
 	ro.allow.mock.location=0 \
 	ro.debuggable=1 \
 	persist.service.adb.enable=1 \
+	ro.secure=0 \
+	ro.adb.secure=0
 
 ADDITIONAL_DEFAULT_PROPERTIES := \
 	ro.secure=0 \

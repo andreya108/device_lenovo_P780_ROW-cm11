@@ -12,39 +12,41 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-DEVICE_FOLDER := device/lenovo/p780
+DEVICE_FOLDER := device/lenovo/P780_ROW
 
--include vendor/lenovo/p780/BoardConfigVendor.mk
+-include vendor/lenovo/P780_ROW/BoardConfigVendor.mk
 
 # Platform
 TARGET_BOARD_PLATFORM := mt6589
 TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
+TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := cortex-a7
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := mt6589
 
 # blob hacks
-COMMON_GLOBAL_CFLAGS += -DMR1_AUDIO_BLOB -DDISABLE_HW_ID_MATCH_CHECK -DNEEDS_VECTORIMPL_SYMBOLS -DANDROID_P2P -DANDROID_P2P_STUB
-BOARD_HAVE_PRE_KITKAT_AUDIO_BLOB := true
-BOARD_HAVE_PRE_KITKAT_AUDIO_POLICY_BLOB := true
+#COMMON_GLOBAL_CFLAGS += -DMR1_AUDIO_BLOB -DDISABLE_HW_ID_MATCH_CHECK -DNEEDS_VECTORIMPL_SYMBOLS -DANDROID_P2P -DANDROID_P2P_STUB
+COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
-BOARD_HAS_MTK_HARDWARE := true
+TARGET_ENABLE_NON_PIE_SUPPORT := true
 
 # HW Composer
 BOARD_NEEDS_OLD_HWC_API := true
 COMMON_GLOBAL_CFLAGS += -DMTK_G_MT6589
 COMMON_GLOBAL_CPPFLAGS += -DMTK_G_MT6589
+BOARD_HAS_MTK_HARDWARE := true
+COMMON_GLOBAL_CFLAGS += -DMTK_HARDWARE
+COMMON_GLOBAL_CPPFLAGS += -DMTK_HARDWARE
 
 # BT
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_MTK := true
 BOARD_BLUETOOTH_DOES_NOT_USE_RFKILL := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lenovo/p780/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lenovo/P780_ROW/bluetooth
 
 # power
 TARGET_POWERHAL_VARIANT := cm
@@ -53,14 +55,14 @@ TARGET_POWERHAL_VARIANT := cm
 TARGET_NO_BOOTLOADER := true
 
 # EGL settings
-BOARD_EGL_CFG := device/lenovo/p780/egl.cfg
+BOARD_EGL_CFG := device/lenovo/P780_ROW/egl.cfg
 USE_OPENGL_RENDERER := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 
 # kernel
 TARGET_PREBUILT_KERNEL := $(DEVICE_FOLDER)/prebuilt/kernel
-#TARGET_KERNEL_SOURCE := kernel/lenovo/p780
-#TARGET_KERNEL_CONFIG := p780_defconfig
+#TARGET_KERNEL_SOURCE := kernel/lenovo/P780_ROW
+#TARGET_KERNEL_CONFIG := P780_ROW_defconfig
 #TARGET_KERNEL_VARIANT_CONFIG := msm8926-sec_matisselte_defconfig
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 
@@ -74,6 +76,7 @@ BOARD_FLASH_BLOCK_SIZE := 512
 TARGET_USERIMAGES_USE_EXT4 := true
 
 # recovery
+#TARGET_NO_RECOVERY := true
 #TARGET_RECOVERY_FSTAB := $(DEVICE_FOLDER)/recovery.fstab
 #TARGET_PREBUILT_RECOVERY_KERNEL := $(DEVICE_FOLDER)/recovery/kernel
 BOARD_HAS_NO_SELECT_BUTTON := true
@@ -100,7 +103,7 @@ TW_BRIGHTNESS_PATH := /sys/devices/platform/leds-mt65xx/leds/lcd-backlight/brigh
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0/gadget/lun%d/file
 TW_MAX_BRIGHTNESS := 255
 TW_CUSTOM_BATTERY_PATH := /sys/devices/platform/battery/power_supply/battery
-TW_BACKUPS_FOLDER := /sdcard/TWRP/BACKUPS/Lenovo_P780_ROW_MT6589
+TW_BACKUPS_FOLDER := /sdcard/TWRP/BACKUPS/Lenovo_P780_ROW_ROW_MT6589
 
 #TW_EXCLUDE_SUPERSU := true
 #TW_NO_EXFAT := true
@@ -118,34 +121,35 @@ TW_INCLUDE_NTFS_3G := true
 
 
 # mkimage to append headers
-TARGET_MKIMAGE := device/lenovo/p780/mkimage
+TARGET_MKIMAGE := device/lenovo/P780_ROW/mkimage
 TARGET_USE_BUILT_BOOTIMAGE := true
 
-# wifi
+# Wi-Fi
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_HOSTAPD_DRIVER := NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_mtk
-BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_mtk
-
-# dummy FW paths to trigger libhardware_legacy/wifi FW switch throuh hald
-WIFI_DRIVER_FW_PATH_AP := "AP"
-WIFI_DRIVER_FW_PATH_STA := "STA"
-WIFI_DRIVER_FW_PATH_P2P := "STA+P2P"
+BOARD_WLAN_DEVICE := mediatek
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_mt66xx
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_mt66xx
+WIFI_DRIVER_FW_PATH_PARAM:="/dev/wmtWifi"
+WIFI_DRIVER_FW_PATH_STA:=STA
+WIFI_DRIVER_FW_PATH_AP:=AP
+WIFI_DRIVER_FW_PATH_P2P:=P2P
 
 # telephony
-BOARD_RIL_CLASS := ../../../device/lenovo/p780/ril/
+BOARD_RIL_CLASS := ../../../device/lenovo/P780_ROW/ril/
 
 #nvram permission fix
-TARGET_SPECIFIC_HEADER_PATH := device/lenovo/p780/include
+TARGET_SPECIFIC_HEADER_PATH := device/lenovo/P780_ROW/include
 
 # allow more than one lun file
 #TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun%d/file"
 
 #SEPolicy
-#BOARD_SEPOLICY_DIRS += \
-#    device/lenovo/p780/sepolicy
+BOARD_SEPOLICY_DIRS += \
+    device/lenovo/P780_ROW/sepolicy
 
-#BOARD_SEPOLICY_UNION += \
-#    file_contexts \
-
+BOARD_SEPOLICY_UNION += \
+    file_contexts \
+    device.te \
+    netd.te

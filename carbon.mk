@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Inherit device configuration
-$(call inherit-product, device/lenovo/p780/full_p780.mk)
+$(call inherit-product, device/lenovo/P780_ROW/full_P780_ROW.mk)
 
 # Inherit CM common GSM stuff.
 $(call inherit-product, vendor/carbon/config/common_gsm.mk)
@@ -26,9 +26,9 @@ $(call inherit-product, vendor/carbon/config/common.mk)
 TARGET_SCREEN_HEIGHT := 1280
 TARGET_SCREEN_WIDTH := 720
 
-PRODUCT_NAME := lenovo_p780
-PRODUCT_DEVICE := p780
-PRODUCT_MODEL := Lenovo P780
-PRODUCT_RELEASE_NAME := p780
+PRODUCT_NAME := lenovo_P780_ROW
+PRODUCT_DEVICE := P780_ROW
+PRODUCT_MODEL := Lenovo P780_ROW
+PRODUCT_RELEASE_NAME := P780_ROW
 PRODUCT_BRAND := Lenovo
 PRODUCT_MANUFACTURER := Lenovo

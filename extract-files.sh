@@ -1,7 +1,7 @@
 #!/bin/sh
 
 VENDOR=lenovo
-DEVICE=p780
+DEVICE=P780_ROW
 
 BASE=../../../vendor/$VENDOR/$DEVICE/proprietary
 
